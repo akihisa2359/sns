@@ -28,6 +28,7 @@ class Message(models.Model):
     class Meta:
         ordering = ('-pub_date',)
         
+    
 class Friend(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, \
                               related_name='friend_owner')
