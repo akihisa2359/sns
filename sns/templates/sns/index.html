@@ -4,7 +4,9 @@
 
 {% block header %}
 <h1>Sns</h1>
-<p class="caption">※グループのチェックをONにしてupdateすると、そのグループに登録されている利用者のメッセージだけが表示されます。</p>
+<p class="caption">※グループのチェックをONにしてupdateすると、そのグループに登録されている利用者のメッセージだけが表示されます。
+</br>ただし、Publicの投稿以外はお互いがフォローしていないと表示されません。</p>
+
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}

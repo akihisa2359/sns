@@ -267,8 +267,9 @@ def get_your_group_message(owner, glist, find):
         messages = Message.objects.filter(Q(group__in=me_belong_groups) \
                                     |Q(group__in=check_groups))[:100]
     else:
-        messages = Message.objects.filter(group__in=me_belong_groups) \
-                                    .filter(content__contains=find)[:100]
+        messages = Message.objects.filter(Q(group__in=me_belong_groups) \
+                                          |Q(group__in=check_groups)) \
+                                            .filter(content__contains=find)[:100]
     return messages
     
 def get_public():
@@ -276,6 +277,7 @@ def get_public():
     public_group = Group.objects.get(owner=public_user)
     return (public_user, public_group)
 
+#ユーザー登録処理
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -287,6 +289,7 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'sns/signup.html', {'form':form})
 
+#ログイン処理
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']

@@ -1,46 +1,43 @@
 {% load static %}
+
 <!doctype html>
-<html lang='ja'>
-<head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <title>SignUp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="\static\sns\topicon.png">
     <link rel="stylesheet" type="text/css"
         href="{% static 'sns/style.css' %}" />
-</head>
+    <title>Signup</title>
+ 
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.1/examples/sign-in/signin.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <form class="form-signin" method="post">{% csrf_token %}
 
-<body>
-    <script type="text/javascript" src="{% static 'sns/jquery-3.3.1.min.js' %}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    
-    <div class="body_content">
-    <div class="body_content_inner">
-        <table class="login_table" width="100%">
-        <tr>
-        <th width="150px">menu</th>
-            <td>
-            <table class="login_table_inner">
-            <tr>
-                <td><a href="{% url 'index' %}">top</a></td>
-                <td><a href="{% url 'post' %}">post</a></td>   
-                <td><a href="{% url 'groups' %}">group</a><td>
-            </tr>
-            </table>
-            </td>
-        </tr>
-        </table>
-        <div class="signup_header">SignUp</div>
- 
-        <p></p>
-        <h2>ユーザ登録</h2>
-        <p>パスワードは8文字以上にして下さい。</p>
-        
-        <!-- フォーム -->
-        <form action="{% url 'signup' %}" method="post">
- 
+    <img class="mb-4" src="\static\sns\createicon.png" width="120" height="120">
+              
+    {# エラーメッセージを表示 #}
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+         {% endfor %}
+    {% endif %}
+            
+      <h2 class="h3 mb-3 font-weight-normal">Create User</h2>
+      <p><font size="2">パスワードは8文字以上で設定してください</font></p>
             <!-- ユーザ名 -->
             <div class="form-group row">
-                <label for="name" class="col-md-3 col-form-label">
-                    ユーザ名 <span class="attention">[必須]</span>
+                <label for="name" class="col-md-3 col-form-label" >
+                    <font size="2">ユーザ名</font> <span class="attention">[必須]</span>
                 </label>
                 <div class="col-md-9">
                     {% csrf_token %}
@@ -48,11 +45,11 @@
                 </div>
             </div>
             <!-- /ユーザ名 -->
- 
+
             <!-- パスワード -->
             <div class="form-group row">
                 <label for="password" class="col-md-3 col-form-label">
-                    パスワード <span class="attention">[必須]</span>
+                    <font size="2">パスワード</font> <span class="attention">[必須]</span>
                 </label>
                 <div class="col-md-9">
                     {% csrf_token %}
@@ -64,33 +61,24 @@
             <!-- パスワード確認 -->
             <div class="form-group row">
                 <label for="password2" class="col-md-3 col-form-label">
-                    パスワードの確認 <span class="attention">[必須]</span>
+                    <font size="2">パスワードの確認</font> <span class="attention">[必須]</span>
                 </label>
                 <div class="col-md-9">
                     {% csrf_token %}
                     {{ form.password2 }}
                 </div>
             </div>
-            <!-- /パスワード確認 -->
             
-            {# エラーメッセージを表示 #}
-            {% if form.errors %}
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                 {% endfor %}
-            {% endif %}
-            
+
             <!-- 確認ボタン -->
             <div class="form-group row justify-content-end">
                 <div class="col-md-9">
                     <button type="submit" class="btn btn-primary">登録する</button>
                 </div>
             </div>
-        </form>
-    </div>
-    </div>
-</body>
-</html>   
- 
+            
+    </form>
+  </body>
+</html>
+
+
